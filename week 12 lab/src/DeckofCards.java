@@ -1,0 +1,60 @@
+import java.util.Arrays;
+
+public class DeckofCards {
+	public static void main(String[] args) {
+		java.util.Scanner input = new java.util.Scanner(System.in);
+		int sum = 0;
+		int[] cardRank = new int[52];
+		for (int i = 0; i < cardRank.length; i++)
+			cardRank[i] = i;
+		String[] suit = { "Hearts", "Clubs", "Diamonds", "Spades" };
+		String[] rank = { "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King" };
+		String[] deck = new String[52];
+		for (int i = 0; i < deck.length;) {
+			for (int j = 0; j < 14; i++, j++) {
+				if (j == 13)
+					j = 0;
+				if (i < 13)
+					deck[i] = rank[j] + " of " + suit[0];
+				if (i > 12 && i < 26)
+					deck[i] = rank[j] + " of " + suit[1];
+				if (i > 25 && i < 39)
+					deck[i] = rank[j] + " of " + suit[2];
+				if (i > 38 && i < 51)
+					deck[i] = rank[j] + " of " + suit[3];
+				if (i == 51) {
+					deck[i] = rank[j] + " of " + suit[3];
+					j = 14;
+				}
+			}
+		}
+		shuffle(deck, cardRank);
+		System.out.println("Enter an index.");
+		int j = input.nextInt();
+		System.out.println("Enter an index.");
+		int i = input.nextInt();
+		compareTo(deck, cardRank, j, i);
+	}
+
+	public static void shuffle(String[] deck, int[] card) {
+		String temp = "";
+		int temp2 = 0;
+		for (int p = 0; p < 101; p++) {
+			int i = (int) (Math.random() * (51));
+			int o = (int) (Math.random() * (51));
+			temp = deck[i];
+			deck[i] = deck[o];
+			temp = deck[o];
+			temp2 = card[i];
+			card[i] = card[o];
+			temp2 = card[o];
+		}
+	}
+
+	public static void compareTo(String[] deck, int[] card, int j, int i) {
+		if (card[j] > card[i])
+			System.out.println(deck[j] + " at index " + j + " is higher rank then " + deck[i] + " at index " + i);
+		else
+			System.out.println(deck[i] + " at index " + i + " is higher rank then " + deck[j] + " at index " + j);
+	}
+}

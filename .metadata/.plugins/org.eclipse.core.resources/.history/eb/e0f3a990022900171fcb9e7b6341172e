@@ -1,0 +1,105 @@
+import java.util.Scanner;
+
+public class Assignment_4 {
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		String[] bookTitle = { "Starting out with Java", "Java Programming", "Software Structures",
+				"Design and Analysis of Algorithms", "Computer Graphics", "Artificial Intelligence: A Modern Approach",
+				"Probability and Statistics", "Cognitive Science", "Modern Information Retrieval",
+				"Speech and Language Processing" };
+		int[] bookID = { 1101, 1211, 1333, 1456, 1567, 1642, 1699, 1755, 1800, 1999 };
+		double[] bookPrice = { 112.32, 73.25, 54.00, 67.32, 135.00, 173.22, 120.00, 42.25, 32.11, 123.75 };
+		int choice = 0, ID = 0, amount = 0;
+		double price = 0, time = 0, Mtime = 0, runTime = 0;
+		do {
+			time = 0;
+			Mtime = 0;
+			runTime = 0;
+			System.out.println("__Menu__");
+			System.out.println("(1) Linear Search");
+			System.out.println("(2) Binary Search");
+			System.out.println("(3) Bubble Sort");
+			System.out.println("(4) Selection Sort");
+			System.out.println("(5) Quit");
+			choice = input.nextInt();
+			if (choice == 1) {
+				do {
+					display(bookID, bookPrice, bookTitle);
+					System.out.println("pick book with book ID");
+					ID = input.nextInt();
+					if (linear_search(bookID, ID) != -1) {
+						time = (double) (System.nanoTime() / 1000000000.0);
+						price = bookPrice[linear_search(bookID, ID)];
+						Mtime = (double) (System.nanoTime() / 1000000000.0);
+						runTime = (Mtime - time);
+						System.out.println("Enter amount");
+						amount = input.nextInt();
+						System.out.println("book ID: " + bookID[linear_search(bookID, ID)]);
+						System.out.println("book Title: " + bookTitle[linear_search(bookID, ID)]);
+						System.out.println("Amount bought: " + amount);
+						System.out.println("Total is: " + (price * amount));
+						System.out.println(" ");
+						System.out.println("Run-time of operation: " + (runTime));
+					} else
+						System.out.println("invaild ID");
+				} while (linear_search(bookID, ID) == -1);
+			}
+			if (choice == 2) {
+				do {
+					display(bookID, bookPrice, bookTitle);
+					System.out.println("pick book with book ID");
+					ID = input.nextInt();
+					if (binary_search(bookID, ID) != -1) {
+						time = (double) (System.nanoTime() / 1000000000.0);
+						price = bookPrice[binary_search(bookID, ID)];
+						Mtime = (double) (System.nanoTime() / 1000000000.0);
+						runTime = (Mtime - time);
+						System.out.println("Enter amount");
+						amount = input.nextInt();
+						System.out.println("book ID: " + bookID[binary_search(bookID, ID)]);
+						System.out.println("book Title: " + bookTitle[binary_search(bookID, ID)]);
+						System.out.println("Amount bought: " + amount);
+						System.out.println("Total is: " + (price * amount));
+						System.out.println(" ");
+						System.out.println("Run-time of operation: " + (runTime));
+					} else
+						System.out.println("invaild ID");
+				} while (binary_search(bookID, ID) == -1);
+			}
+			if (choice == 5)
+				System.out.println("Good bye");
+		} while (choice != 5);
+	}
+
+	public static void display(int[] array, double[] price, String[] title) {
+		System.out.println("book Title			book ID		book Price");
+		for (int i = 0; i < array.length; i++) {
+			System.out.println(array[i] + "			" + price[i] + "	" + title[i]);
+		}
+	}
+
+	public static int linear_search(int[] array, int n) {
+		int count = 0, index = -1;
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] == n)
+				index = count;
+			count++;
+		}
+		return index;
+	}
+
+	public static int binary_search(int[] array, int n) {
+		int low = 0, high = array.length - 1, mid;
+		while (low <= high) {
+			mid = (high + low) / 2;
+			if (array[mid] == n) {
+				return mid;
+			} else if (array[mid] > n)
+				high = mid - 1;
+			else
+				low = mid + 1;
+		}
+		return -1;
+	}
+
+}

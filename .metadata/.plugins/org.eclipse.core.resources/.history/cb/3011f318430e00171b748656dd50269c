@@ -1,0 +1,53 @@
+import java.util.Date;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+
+public class test {
+	public static int scanI() {
+		java.util.Scanner input = new java.util.Scanner(System.in);
+		int i = input.nextInt();
+		return i;
+	}
+
+	public static String scanS() {
+		java.util.Scanner input = new java.util.Scanner(System.in);
+		String i = input.next();
+		return i;
+	}
+
+	public static void main(String[] args) {
+
+		System.out.println("You chose to make a log. Please select one of the following option");
+		System.out.println("1. Log an Expense");
+		System.out.println("2. Log a Deposit");
+		SimpleDateFormat sdf = new SimpleDateFormat("M/d/yy");
+		Date date = new Date();
+		String strDate = sdf.format(date);
+		FileWriter write = new FileWriter("Logs2.txt");
+		PrintWriter print_line = new PrintWriter(write);
+		// write a code to take the user choice
+		if (scanI() == 1) {
+			System.out.println("What was the event?");
+			String e = scanS();
+			System.out.println("What was the amount?");
+			int y = scanI();
+			print_line.printf("%s" + "%n", strDate + " Expense " + e + " " + (x - y));
+			x = -y;
+			System.out.println("Log Succesfully Added\n");
+		} else if (scanI() == 2) {
+			System.out.println("What was the event?");
+			String e = scanS();
+			System.out.println("What was the amount?");
+			int y = scanI();
+			print_line.printf("%s" + "%n", strDate + " Deposit " + e + " " + (x + y));
+			x = +y;
+			System.out.println("Log Succesfully Added\n");
+		} else
+			System.out.println("Invaild entry");
+		// Write code for reading an existing file and appending a new line at
+		// the end.
+
+	}
+
+}

@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class Stats {
+public static void main(String[] args){
+	Scanner scan = new Scanner(System.in);
+	int n = 0;
+	double x;
+	double sum = 0;
+	double x2 = 0;
+	System.out.println("Enter a number to add it to the list (0 ends the list)");
+	x = scan.nextDouble();
+	while (x != 0){
+		sum += x;
+		x2 += Math.pow(x,2);
+		System.out.println("Enter a number to add it to the list (0 ends the list)");
+		x= scan.nextDouble();
+		++n;
+	}
+	System.out.println("Sum of x's " +sum);
+	double ave = sum/n;
+	System.out.println("Ave of x's " +ave);
+	double var = Math.pow(x2, 2)-Math.pow(ave, 2);
+	System.out.println("Std Dev "+Math.sqrt(var));
+	System.out.println("Varance " +var);
+}
+
+}

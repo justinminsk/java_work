@@ -1,0 +1,19 @@
+import java.util.Date;
+
+import java.text.SimpleDateFormat;
+public class test {
+public static void main(String[] args) {
+	int number = 36;
+		int n = 1 ;
+		int x = 1;
+		for (int divisor = 1; divisor <= number; divisor++) {
+			if (number % divisor == 0) {
+				double[] list = new double[n];
+				n++;
+				list[x] = divisor;
+				System.out.println(list[x]);
+			}
+		}
+
+	}
+}

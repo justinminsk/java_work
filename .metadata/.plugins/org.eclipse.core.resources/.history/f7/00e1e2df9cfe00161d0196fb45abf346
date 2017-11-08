@@ -1,0 +1,38 @@
+/**
+ * @author justin minsk
+ * @version [3/1/2017]
+ * user inputed numbers are told if they are prime or not 
+ * until user enters -1
+ * 
+ */
+import java.util.Scanner;
+
+public class Prime_Numbers {
+public static boolean Prime(int number){
+	boolean isPrime = true;
+	for (int divisor = 2; divisor <= number / 2; divisor++) {
+		if (number % divisor == 0){
+			isPrime = false;
+			break;
+		}
+	}
+	return isPrime;
+}
+public static void question(){
+	System.out.println("Enter an integer: ");
+}
+public static void mian(String[] args){
+	Scanner scan =new Scanner(System.in);
+	int input;
+	boolean isPrime = true;
+	do{
+	question();
+	input = scan.nextInt();
+	Prime(input);
+	if (isPrime)
+		System.out.println(input+" is prime");
+	else
+		System.out.println(input+" is not prime");
+	}while (input != -1);
+}
+}

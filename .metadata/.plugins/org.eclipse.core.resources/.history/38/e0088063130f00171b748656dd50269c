@@ -1,0 +1,536 @@
+import java.io.*;
+import java.text.*;
+import java.util.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.util.Date;
+
+/**
+ * Write a really good Description on how you understand this algorithm. The
+ * Description should briefly describe on how the program is running to what it
+ * should do.
+ *
+ * @author Devansh
+ * @version 3/1/2017
+ */
+public class Assignment2 {
+	// created a method to scan
+	public static String scanS() {
+		java.util.Scanner input = new java.util.Scanner(System.in);
+		String i = input.next();
+		return i;
+	}
+
+	public static int scanI() {
+		java.util.Scanner input = new java.util.Scanner(System.in);
+		int i = input.nextInt();
+		return i;
+	}
+	// You can use a static scanner if you want or you can declare scanner in
+	// individual methods.
+	// Static Scanner is beneficial as it will save you time in declaring the
+	// Scanner again and again
+
+	public static char menu() {
+		System.out.println("Select one of the following options\n");
+		System.out.println("A. Make a log");
+		System.out.println("B. View all logs for my previous expenses");
+		System.out.println("C. View all logs for deposits");
+		System.out.println("D. View all logs for a particular month");
+		System.out.println("E. View Customized logs for a particular month");
+		System.out.println("F. View all logs for a particular day");
+		System.out.println("G. View Customized logs for a particular day");
+		System.out.println("H. View all logs for a particular previous expenses");
+		System.out.println("I. View all logs for a particular previous deposits");
+		System.out.println("J. View all logs till date");
+		System.out.println("Q. Quit");
+		// Write code that will return the user choice instead of Q
+		// call scan and make it equal to the first char
+		char choice;
+		return choice = scanS().charAt(0);
+	}
+
+	public static void optionA(int x) throws IOException {
+
+		System.out.println("You chose to make a log. Please select one of the following option");
+		System.out.println("1. Log an Expense");
+		System.out.println("2. Log a Deposit");
+		SimpleDateFormat sdf = new SimpleDateFormat("M/d/yy");
+		Date date = new Date();
+		String strDate = sdf.format(date);
+		FileWriter write = new FileWriter("Logs.txt");
+		PrintWriter print_line = new PrintWriter(write);
+		// write a code to take the user choice
+		if (scanI() == 1) {
+			System.out.println("What was the event?");
+			String e = scanS();
+			System.out.println("What was the amount?");
+			int y = scanI();
+			print_line.printf("%s" + "%n", strDate + " Expense " + e + " " + (x - y));
+			x =- y;
+			System.out.println("Log Succesfully Added\n");
+		} else if (scanI() == 2) {
+			System.out.println("What was the event?");
+			String e = scanS();
+			System.out.println("What was the amount?");
+			int y = scanI();
+			print_line.printf("%s" + "%n", strDate + " Deposit " + e + " " + (x + y));
+			x =+ y;
+			System.out.println("Log Succesfully Added\n");
+		} else
+			System.out.println("Invaild entry");
+		// Write code for reading an existing file and appending a new line at
+		// the end.
+
+	}
+
+	public static void optionB() throws IOException {
+
+		System.out.println("You chose to view all logs for expenses");
+		// Write code for Option B here
+		BufferedReader br = new BufferedReader(new FileReader("logs.txt"));
+		String line = br.readLine();
+		while (line != null) {
+			java.util.StringTokenizer st = new java.util.StringTokenizer(line);
+			String date = st.nextToken();
+			String type = st.nextToken();
+			String event = st.nextToken();
+			int amount = Integer.parseInt(st.nextToken());
+			int balance = Integer.parseInt(st.nextToken());
+			if (type.contains("Expense"))
+				System.out.println(date + " \t" + type + " \t" + event + " \t" + amount + " \t" + balance);
+			line = br.readLine();
+		}
+	}
+
+	public static void optionC() throws IOException {
+
+		System.out.println("You chose to view all logs for deposits");
+		// Write code for Option C here
+		BufferedReader br = new BufferedReader(new FileReader("logs.txt"));
+		String line = br.readLine();
+		while (line != null) {
+			java.util.StringTokenizer st = new java.util.StringTokenizer(line);
+			String date = st.nextToken();
+			String type = st.nextToken();
+			String event = st.nextToken();
+			int amount = Integer.parseInt(st.nextToken());
+			int balance = Integer.parseInt(st.nextToken());
+			if (type.contains("Deposit"))
+				System.out.println(date + " \t" + type + " \t" + event + " \t" + amount + " \t" + balance);
+			line = br.readLine();
+		}
+	}
+
+	public static void optionD() throws IOException {
+
+		System.out.println(
+				"You chose to view all logs for particular month. Enter the month you would like to see (1-12)");
+		// Write code for Option D here
+		int x = scanI();
+		month(x);
+	}
+
+	public static void optionE() throws IOException {
+		System.out.println("You chose to view customized logs for a particular month. Enter the month: ");
+		// Write code for Option E here
+		BufferedReader br = new BufferedReader(new FileReader("logs.txt"));
+		String line = br.readLine();
+		int x = scanI();
+		menuForC();
+		int z = scanI();
+		if (x == 1 || x == 2 || x == 3 || x == 4 || x == 5 || x == 6 || x == 7 || x == 8 || x == 9 || x == 10 || x == 11
+				|| x == 12) {
+			if (z == 1) {
+				while (line != null) {
+					StringTokenizer st = new StringTokenizer(line);
+					String date = st.nextToken();
+					String type = st.nextToken();
+					String event = st.nextToken();
+					int amount = Integer.parseInt(st.nextToken());
+					int balance = Integer.parseInt(st.nextToken());
+					if (date.startsWith(x + "/") && type.contains("Expense"))
+						System.out.println(date + " \t" + type + " \t" + event + " \t" + amount + " \t" + balance);
+					line = br.readLine();
+				}
+			}
+			if (z == 2) {
+				while (line != null) {
+					StringTokenizer st = new StringTokenizer(line);
+					String date = st.nextToken();
+					String type = st.nextToken();
+					String event = st.nextToken();
+					int amount = Integer.parseInt(st.nextToken());
+					int balance = Integer.parseInt(st.nextToken());
+					if (date.startsWith(x + "/") && type.contains("Deposit"))
+						System.out.println(date + " \t" + type + " \t" + event + " \t" + amount + " \t" + balance);
+					line = br.readLine();
+				}
+			}
+			if (z == 3) {
+				while (line != null) {
+					StringTokenizer st = new StringTokenizer(line);
+					String date = st.nextToken();
+					String type = st.nextToken();
+					String event = st.nextToken();
+					int amount = Integer.parseInt(st.nextToken());
+					int balance = Integer.parseInt(st.nextToken());
+					if (date.startsWith(x + "/"))
+						System.out.println(date + " \t" + type + " \t" + event + " \t" + amount + " \t" + balance);
+					line = br.readLine();
+				}
+			}
+		} else
+			System.out.println("invaild entry");
+	}
+
+	public static void optionF() throws IOException {
+		System.out.println(
+				"You chose to view all logs for particular month. Enter the month you would like to see (1-12)");
+		// Take the user input for month
+		int x = scanI();
+		System.out
+				.println("You chose to view all logs for particular month. Enter the day you would like to see (1-31)");
+		// Take the user input for day
+		int y = scanI();
+		day(x, y);
+	}
+
+	public static void optionG() throws IOException {
+		System.out.println("You chose to view customized logs for a particular month. Enter the month: ");
+		// Take the user input for month
+		int x = scanI();
+		System.out.println("Enter the Day (1-31): ");
+		// Take the user input for day
+		int y = scanI();
+		menuForC();
+		int z = scanI();
+		// Write code for Option F here
+		BufferedReader br = new BufferedReader(new FileReader("logs.txt"));
+		String line = br.readLine();
+		if (y == 1 || y == 2 || y == 3 || y == 4 || y == 5 || y == 6 || y == 7 || y == 8 || y == 9 || y == 10 || y == 11
+				|| y == 12 || y == 13 || y == 14 || y == 15 || y == 16 || y == 17 || y == 18 || y == 19 || y == 20
+				|| y == 21 || y == 22 || y == 23 || y == 24 || y == 25 || y == 26 || y == 27 || y == 28 || y == 29
+				|| y == 30 || y == 31) {
+			if (z == 1) {
+				while (line != null) {
+					StringTokenizer st = new StringTokenizer(line);
+					String date = st.nextToken();
+					String type = st.nextToken();
+					String event = st.nextToken();
+					int amount = Integer.parseInt(st.nextToken());
+					int balance = Integer.parseInt(st.nextToken());
+					if (date.startsWith(x + "/" + y + "/") && type.contains("Expense"))
+						System.out.println(date + " \t" + type + " \t" + event + " \t" + amount + " \t" + balance);
+					line = br.readLine();
+				}
+			}
+			if (z == 2) {
+				while (line != null) {
+					StringTokenizer st = new StringTokenizer(line);
+					String date = st.nextToken();
+					String type = st.nextToken();
+					String event = st.nextToken();
+					int amount = Integer.parseInt(st.nextToken());
+					int balance = Integer.parseInt(st.nextToken());
+					if (date.startsWith(x + "/" + y + "/") && type.contains("Deposit"))
+						System.out.println(date + " \t" + type + " \t" + event + " \t" + amount + " \t" + balance);
+					line = br.readLine();
+				}
+			}
+			if (z == 3) {
+				while (line != null) {
+					StringTokenizer st = new StringTokenizer(line);
+					String date = st.nextToken();
+					String type = st.nextToken();
+					String event = st.nextToken();
+					int amount = Integer.parseInt(st.nextToken());
+					int balance = Integer.parseInt(st.nextToken());
+					if (date.startsWith(x + "/" + y + "/"))
+						System.out.println(date + " \t" + type + " \t" + event + " \t" + amount + " \t" + balance);
+					line = br.readLine();
+				}
+			}
+		} else
+			System.out.println("invaild entry");
+	}
+
+	public static void optionH() throws IOException {
+		System.out.println(
+				"You chose to view all logs for a particular Expense. Please select one of the following option");
+		System.out.println("1. Food");
+		System.out.println("2. Entertainment");
+		System.out.println("3. Academic");
+		System.out.println("4. Other");
+		// Take the user choice
+		int x = scanI();
+		BufferedReader br = new BufferedReader(new FileReader("logs.txt"));
+		String line = br.readLine();
+		if (x == 1) {
+			while (line != null) {
+				StringTokenizer st = new StringTokenizer(line);
+				String date = st.nextToken();
+				String type = st.nextToken();
+				String event = st.nextToken();
+				int amount = Integer.parseInt(st.nextToken());
+				int balance = Integer.parseInt(st.nextToken());
+				if (event.startsWith("Food"))
+					System.out.println(date + " \t" + type + " \t" + event + " \t" + amount + " \t" + balance);
+				line = br.readLine();
+			}
+		} else if (x == 2) {
+			while (line != null) {
+				StringTokenizer st = new StringTokenizer(line);
+				String date = st.nextToken();
+				String type = st.nextToken();
+				String event = st.nextToken();
+				int amount = Integer.parseInt(st.nextToken());
+				int balance = Integer.parseInt(st.nextToken());
+				if (event.startsWith("Enter"))
+					System.out.println(date + " \t" + type + " \t" + event + " \t" + amount + " \t" + balance);
+				line = br.readLine();
+			}
+		} else if (x == 3) {
+			while (line != null) {
+				StringTokenizer st = new StringTokenizer(line);
+				String date = st.nextToken();
+				String type = st.nextToken();
+				String event = st.nextToken();
+				int amount = Integer.parseInt(st.nextToken());
+				int balance = Integer.parseInt(st.nextToken());
+				if (event.startsWith("Food"))
+					System.out.println(date + " \t" + type + " \t" + event + " \t" + amount + " \t" + balance);
+				line = br.readLine();
+			}
+		} else if (x == 4) {
+			while (line != null) {
+				StringTokenizer st = new StringTokenizer(line);
+				String date = st.nextToken();
+				String type = st.nextToken();
+				String event = st.nextToken();
+				int amount = Integer.parseInt(st.nextToken());
+				int balance = Integer.parseInt(st.nextToken());
+				if (event.startsWith("Other"))
+					System.out.println(date + " \t" + type + " \t" + event + " \t" + amount + " \t" + balance);
+				line = br.readLine();
+			}
+		} else
+			System.out.println("invaild option");
+		// Write the code for Option H
+	}
+
+	public static void optionI() throws IOException {
+		System.out.println(
+				"You chose to view all logs for a particular Deposit. Please select one of the following option");
+		System.out.println("1. Salary");
+		System.out.println("2. Dad_Sent_Some");
+		System.out.println("3. Tutoring");
+		// Take the user choice
+		int x = scanI();
+		BufferedReader br = new BufferedReader(new FileReader("logs.txt"));
+		String line = br.readLine();
+		if (x == 1) {
+			while (line != null) {
+				StringTokenizer st = new StringTokenizer(line);
+				String date = st.nextToken();
+				String type = st.nextToken();
+				String event = st.nextToken();
+				int amount = Integer.parseInt(st.nextToken());
+				int balance = Integer.parseInt(st.nextToken());
+				if (event.startsWith("Sala"))
+					System.out.println(date + " \t" + type + " \t" + event + " \t" + amount + " \t" + balance);
+				line = br.readLine();
+			}
+		} else if (x == 2) {
+			while (line != null) {
+				StringTokenizer st = new StringTokenizer(line);
+				String date = st.nextToken();
+				String type = st.nextToken();
+				String event = st.nextToken();
+				int amount = Integer.parseInt(st.nextToken());
+				int balance = Integer.parseInt(st.nextToken());
+				if (event.startsWith("Dad"))
+					System.out.println(date + " \t" + type + " \t" + event + " \t" + amount + " \t" + balance);
+				line = br.readLine();
+			}
+		} else if (x == 3) {
+			while (line != null) {
+				StringTokenizer st = new StringTokenizer(line);
+				String date = st.nextToken();
+				String type = st.nextToken();
+				String event = st.nextToken();
+				int amount = Integer.parseInt(st.nextToken());
+				int balance = Integer.parseInt(st.nextToken());
+				if (event.startsWith("tut"))
+					System.out.println(date + " \t" + type + " \t" + event + " \t" + amount + " \t" + balance);
+				line = br.readLine();
+			}
+		} else
+			System.out.println("invaild option");
+		// Write the code for Option I
+
+	}
+
+	/**
+	 * This Is the only method given to you. Use this method to understand. You
+	 * can copy paste code from this method to any other methods. However, if
+	 * you do copy, make sure that you have necessary tweaks / addition /
+	 * changes to the code based on what the option wants.
+	 *
+	 * Hint : All the methods in some way is going to use this code given in
+	 * OptionJ method. By using proper conditional statements and user input and
+	 * proper calculations, correct results for display can be obtained.
+	 *
+	 * @throws IOException
+	 */
+	public static void optionJ() throws IOException {
+
+		// A BufferedReader object is used to read an existing file in the
+		// project.
+		// Make sure that the log.txt file is in the Java Project Folder.
+		BufferedReader br = new BufferedReader(new FileReader("logs.txt"));
+
+		// br.readLine() reads the first line from the BufferedReader, assigns
+		// it to String line and then deletes it.
+		// This way, we can reach the 2nd line or the nth line by writing
+		// br.readLine(); two times or n times.
+		String line = br.readLine();
+
+		// to write a code that reach end of file (n lines)
+		// we say that while line has some string in it. Once at an end,
+		// br.readLine returns null if all lines are finished.
+		while (line != null) {
+
+			// String Tokenizer is something that is used to seperate words in a
+			// line based on a delimeter
+			// Default delimeter is space and our log.txt file is space
+			// delimetered file for each line.
+			StringTokenizer st = new StringTokenizer(line);
+
+			// Since we know that each line has 5 elements to it, we can use
+			// that information and assign those 5 strings (Tokens)
+			// And now we have individual Access to data, ie. we can now see the
+			// particular line and see the date, type, event, etc and use it for
+			// comparison.
+			String date = st.nextToken();
+			String type = st.nextToken();
+			String event = st.nextToken();
+			int amount = Integer.parseInt(st.nextToken());
+			int balance = Integer.parseInt(st.nextToken());
+
+			// This line will be simply printing out the give string. we use \t
+			// to make it in a better Format.
+			System.out.println(date + " \t" + type + " \t" + event + " \t" + amount + " \t" + balance);
+
+			// In order to not repeat the process for the same line, we use
+			// br.readLine at the end of loop to make sure that it has a next
+			// line
+			// and to assign that new line to the variable line and repeat the
+			// same process until its value reaches to null.
+			line = br.readLine();
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		System.out.println("Welcome to your daily expense table OUO");
+
+		// Add a suitable looping for this menu. It can be While / Do-while /
+		// for loops.
+		// The menu should loop everytime after the option execution is over
+		// until the user selects Q
+		int x = 914;
+		char choice;
+		do {
+			choice = menu();
+			switch (choice) {
+
+			case 'A':
+				optionA(x);
+				break;
+			case 'B':
+				optionB();
+				break;
+			case 'C':
+				optionC();
+				break;
+			case 'D':
+				optionD();
+				break;
+			case 'E':
+				optionE();
+				break;
+			case 'F':
+				optionF();
+				break;
+			case 'G':
+				optionG();
+				break;
+			case 'H':
+				optionH();
+				break;
+			case 'I':
+				optionI();
+				break;
+			case 'J':
+				optionJ();
+				break;
+			case 'Q':
+				System.out.println("GoodBye :)");
+
+				break;
+			default:
+				System.out.println("Invalid Option :(");
+			}
+		} while (choice != 'Q');
+	}
+
+	public static void menuForC() throws IOException {
+		System.out.println("1. Expenses");
+		System.out.println("2. Deposits");
+		System.out.println("3. Both");
+	}
+
+	public static void day(int x, int y) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader("logs.txt"));
+		String line = br.readLine();
+		if (y == 1 || y == 2 || y == 3 || y == 4 || y == 5 || y == 6 || y == 7 || y == 8 || y == 9 || y == 10 || y == 11
+				|| y == 12 || y == 13 || y == 14 || y == 15 || y == 16 || y == 17 || y == 18 || y == 19 || y == 20
+				|| y == 21 || y == 22 || y == 23 || y == 24 || y == 25 || y == 26 || y == 27 || y == 28 || y == 29
+				|| y == 30 || y == 31) {
+			while (line != null) {
+				StringTokenizer st = new StringTokenizer(line);
+				String date = st.nextToken();
+				String type = st.nextToken();
+				String event = st.nextToken();
+				int amount = Integer.parseInt(st.nextToken());
+				int balance = Integer.parseInt(st.nextToken());
+				if (date.startsWith(x + "/" + y + "/"))
+					System.out.println(date + " \t" + type + " \t" + event + " \t" + amount + " \t" + balance);
+				line = br.readLine();
+			}
+		} else
+			System.out.println("invaild entry");
+	}
+
+	public static void month(int x) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader("logs.txt"));
+		String line = br.readLine();
+		if (x == 1 || x == 2 || x == 3 || x == 4 || x == 5 || x == 6 || x == 7 || x == 8 || x == 9 || x == 10 || x == 11
+				|| x == 12) {
+			while (line != null) {
+				StringTokenizer st = new StringTokenizer(line);
+				String date = st.nextToken();
+				String type = st.nextToken();
+				String event = st.nextToken();
+				int amount = Integer.parseInt(st.nextToken());
+				int balance = Integer.parseInt(st.nextToken());
+				if (date.startsWith(x + "/"))
+					System.out.println(date + " \t" + type + " \t" + event + " \t" + amount + " \t" + balance);
+				line = br.readLine();
+			}
+		} else
+			System.out.println("invaild entry");
+	}
+
+}

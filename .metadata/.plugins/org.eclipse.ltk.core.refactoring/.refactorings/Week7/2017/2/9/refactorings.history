@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;LoopActivity2_withDoWhile.java&apos; to &apos;Week 8&apos;&#x0D;&#x0A;- Original project: &apos;Week7&apos;&#x0D;&#x0A;- Destination element: &apos;Week 8&apos;&#x0D;&#x0A;- Original element: &apos;LoopActivity2_withDoWhile.java&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="=Week 8" element1="/src&lt;{LoopActivity2_withDoWhile.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1488224281061" units="1" version="1.0"/>
+</session>

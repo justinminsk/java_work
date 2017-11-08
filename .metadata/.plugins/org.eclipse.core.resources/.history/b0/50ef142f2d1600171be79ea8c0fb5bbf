@@ -1,0 +1,30 @@
+import java.util.Arrays;
+
+public class DeckofCards {
+	public static void main(String[] args) {
+		java.util.Scanner input = new java.util.Scanner(System.in);
+		int sum = 0;
+		String[] suit = { "Hearts", "Spades", "Clubs", "Diamonds" };
+		String[] rank = { "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "Jack", "Queen", "King" };
+		String[] deck = new String[52];
+		for (int i = 0; i < deck.length;) {
+			for (int j = 0; j < 13; i++, j++) {
+				if (j == 12)
+					j = 0;
+				if (i < 12)
+					deck[i] = rank[j] + " of " + suit[0];
+				if (i > 11 && i < 24)
+					deck[i] = rank[j] + " of " + suit[1];
+				if (i > 23 && i < 36)
+					deck[i] = rank[j] + " of " + suit[2];
+				if (i > 35 && i < 52)
+					deck[i] = rank[j] + " of " + suit[3];
+				if (i == 51) {
+					deck[i] = rank[j] + " of " + suit[3];
+					j = 13;
+				}
+			}
+		}
+		System.out.println(Arrays.toString(deck));
+	}
+}
